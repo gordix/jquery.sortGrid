@@ -24,7 +24,9 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "libs",
+    "demo"
   ],
   "dependencies": {
     "jquery": ">=1.4.3"
