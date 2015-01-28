@@ -1,0 +1,25 @@
+{
+  "name": "sortGrid",
+  "title": "jquery-sortGrid",
+  "description": "A lightweight and easy to use plugin to filter and sort items and displaying them in a grid",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Fuzzyma/jquery-sortGrid",
+  "author": {
+    "name": "Ulrich-Matthias Schäfer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Fuzzyma/jquery-sortGrid.git"
+  },
+  "bugs": "https://github.com/Fuzzyma/jquery-sortGrid/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Fuzzyma/jquery-sortGrid/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "1.4.3"
+  },
+  "keywords": []
+}

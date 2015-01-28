@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>jquery-sortGrid - Demo</title>
+  
+  <script src="../libs/jquery-loader.js"></script>
+  <script src="../src/jQuery.sortGrid.js"></script>
+
+  <link rel="stylesheet" href="jquery.sortGrid.css">
+
+<script type="text/javascript">
+$(function(){
+
+  // Some nice colors for the items
+  $('#grid_parent').children().each(function(i){
+  
+    var color = {
+        r: ~~(255 / ($('div>div').length-1) * i),
+        g: 255 - ~~(255 / ($('div>div').length-1) * i),
+        b: 0
+    };
+    
+    $(this).css({background:'rgb('+color.r+','+color.g+','+color.b+')'});
+  
+  });
+
+  $('#filter_and_sort').click(function(e){
+    
+    // Filter some random elements
+    var $filter = $('#grid_parent>div').filter(function(){
+        return !Math.round(Math.random());
+    });
+    
+    // call sortGrid with filter and random sort
+    $('#grid_parent').sortGrid({filter: $filter, sort:function(el1, el2){return Math.random() * 2 - 1}});
+  });
+  
+  $('#filter_even').click(function(e){
+    
+    // call sortGrid with even-filter
+    $('#grid_parent').sortGrid({filter: ':nth-child(even)'});
+  });
+  
+  $('#filter_odd').click(function(e){
+    
+    // call sortGrid with even-filter
+    $('#grid_parent').sortGrid({filter: ':nth-child(odd)'});
+  });
+  
+  $('#sort_by_index').click(function(e){
+    
+    // call sortGrid with even-filter
+    $('#grid_parent').sortGrid({sort: function(el1, el2){ return $(el1).index() > $(el2).index() }});
+  });
+  
+  $('#sort_reverse_by_index').click(function(e){
+    
+    // call sortGrid with even-filter
+    $('#grid_parent').sortGrid({sort: function(el1, el2){ return $(el1).index() < $(el2).index() }});
+  });
+
+  // Call sortGrid ondomready
+  $('#grid_parent').sortGrid();
+
+});  
+
+</script>
+
+
+</head>
+<body>
+
+<button id="filter_and_sort">filter and sort random</button>
+<button id="filter_even">filter even</button>
+<button id="filter_odd">filter odd</button>
+<button id="sort_by_index">sort by index</button>
+<button id="sort_reverse_by_index">sort reverse by index</button>
+
+
+  <div id="grid_parent">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+</body>
+</html>
