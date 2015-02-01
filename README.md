@@ -17,6 +17,10 @@ Download the [production version][min] or the [development version][max].
 [min]: https://raw.github.com/ulima/jquery-sortGrid/master/dist/sortGrid.min.js
 [max]: https://raw.github.com/ulima/jquery-sortGrid/master/dist/sortGrid.js
 
+Or just run
+
+    bower install jquery.sortgrid
+
 Include the sript in your page after jQuery:
 
     <script src="jquery.js"></script>
