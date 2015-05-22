@@ -31,11 +31,12 @@
               , $visible  = $items.not('.'+hideClass)
               , $toHide   = $visible.not($filter)
               , len       = $filter.length
-              , colWidth  = settings.width !== 'auto' ? settings.width : $visible.outerWidth(true)
-              , colHeight = settings.height !== 'auto' ? settings.height : $visible.outerHeight(true)
+              , colWidth  = settings.width !== 'auto' ? settings.width : $visible.outerWidth(true) || $parent.data('width')
+              , colHeight = settings.height !== 'auto' ? settings.height : $visible.outerHeight(true) || $parent.data('height')
               , colNum    = ~~($parent.width() / colWidth)
               , rowNum    = Math.ceil(len / colNum);
 
+            if(!$parent.data().width)$parent.data({width:colWidth, height:colHeight});
             
             $items.addClass(settings.classPrefix + 'item');
             //if(settings.animate && useCss3) $items.addClass(settings.classPrefix + 'css3');
@@ -54,7 +55,7 @@
 
             var startX = ($parent.innerWidth() - colNum * colWidth) / 2
               , startY = ($parent.innerHeight() - $parent.height()) / 2
-              , itemPadding = (colWidth - $visible.outerWidth(true)) / 2;
+              , itemPadding = (colWidth - ($visible.outerWidth(true) || colWidth)) / 2;
 
             // Apply new position to every item
             for(var i = len; i--;){ // Kann hier auch gleich `len` benutzen
