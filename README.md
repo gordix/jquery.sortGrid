@@ -76,7 +76,9 @@ The following options are available
         classPrefix: 'sortGrid_',	// prefix of the class-names used
         selector:'*',				// only items found with this selectir will be affected by this plugin
         filter:'*',					// filter items (expecteds selector or jQuery-collection)
-        sort:false					// standart sort function can be used here
+        sort:false,					// standart sort function can be used here
+        dataSortBy: 'text',			// default sort by elements's .text() value when using data attributes
+        dataSortOrder: 'asc'		// deafult sort order when using data attributes
     };
 
 You can overide this options as you like to customize the plugin to your needs.
@@ -86,6 +88,11 @@ However you can also just pass the options you want to change when calling the p
         $('#myGrid').sortGrid({width:200, selector: '.only_my_items'});
     });
 
+You can use elements data attributes as a sort selector. Use it like this:
+
+    $(function(){
+        $('#myGrid').sortGrid({sort: 'data', dataSortBy: 'likes', dataSortOrder: 'desc'});
+    });
 
 ## Example
 
@@ -125,6 +132,25 @@ Just call the plugin on the div#myGrid and the items will arange
 
     $(function(){
         $('#myGrid').sortGrid();
+    });
+
+## Example with data attributes
+
+Assuming you got a box with many items:
+
+    <div id="myGrid">
+    <div class="alive" data-number="1" data-name="Cat" data-likes="50">1, Cat, 50</div>
+    <div class="big" data-number="2" data-name="Airplane" data-likes="3">2, Airplane, 3</div>
+    <div class="big" data-number="3" data-name="Earth" data-likes="99">3, Earth, 99</div>
+    <div class="small" data-number="4" data-name="Coin" data-likes="14">4, Coin, 14</div>
+    <div class="small" data-number="5" data-name="Phone" data-likes="134">5, Phone, 134</div>
+    <div class="small" class="alive" data-number="6" data-name="Dog" data-likes="55">6, Dog, 55</div>
+    </div>
+
+Just call the plugin on the div#myGrid with option sort: 'data' and the items will arange by specified selector
+
+    $(function(){
+        $('#myGrid').sortGrid({sort: 'data', dataSortBy: 'likes', dataSortOrder: 'desc'});
     });
 
 ## Good to know
