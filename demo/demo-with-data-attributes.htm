@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>jquery-sortGrid - data attributes - demo</title>
+  
+  <script src="../libs/jquery-loader.js"></script>
+  <script src="../src/jQuery.sortGrid.js"></script>
+
+  <link rel="stylesheet" href="jquery.sortGrid.css">
+
+<script type="text/javascript">
+$(function(){
+
+  // Some nice colors for the items
+  $('#grid_parent').children().each(function(i){
+  
+    var color = {
+        r: ~~(255 / ($('div>div').length-1) * i),
+        g: 255 - ~~(255 / ($('div>div').length-1) * i),
+        b: 0
+    };
+
+    $(this).css({background:'rgb('+color.r+','+color.g+','+color.b+')'});
+  });
+
+  $('#filter_and_sort').click(function(e){
+    
+    // Filter some random elements
+    var $filter = $('#grid_parent>div').filter(function(){
+        return !Math.round(Math.random());
+    });
+    
+    // call sortGrid with filter and random sort
+    $('#grid_parent').sortGrid({filter: $filter, sort:function(el1, el2){return Math.random() * 2 - 1}});
+  });
+  
+  $('#filter_even').click(function(e){
+    
+    // call sortGrid with even-filter
+    $('#grid_parent').sortGrid({filter: ':nth-child(even)'});
+  });
+  
+  $('#filter_odd').click(function(e){
+    
+    // call sortGrid with even-filter
+    $('#grid_parent').sortGrid({filter: ':nth-child(odd)'});
+  });
+  
+  $('#sort_by_index').click(function(e){
+    
+    // call sortGrid with even-filter
+    $('#grid_parent').sortGrid({sort: function(el1, el2){ return $(el1).index() > $(el2).index() }});
+  });
+  
+
+  $('#sort_reverse_by_index').click(function(e){
+    
+    // call sortGrid with even-filter
+    $('#grid_parent').sortGrid({sort: function(el1, el2){ return $(el1).index() < $(el2).index() }});
+  });
+
+  // sort by data attribute name specifed here (the one clicked on)
+  $('.sort-by-data').click(function(e){
+    $('#grid_parent').sortGrid({sort: 'data', dataSortBy: $(this).data('sort-by'), dataSortOrder: $(this).data('sort-order')});
+  });
+
+  // just another filter example
+  $('.filter-by-class').click(function(e){
+    $('#grid_parent').sortGrid({filter: $(this).data('filter')});
+  });
+
+  // Call sortGrid ondomready
+  $('#grid_parent').sortGrid();
+
+});  
+
+</script>
+
+
+</head>
+<body>
+
+data attribute sort (number, name, likes) <br />
+<button class="sort-by-data" data-sort-by="number">sort by number</button>
+<button class="sort-by-data" data-sort-by="name">sort by name</button>
+<button class="sort-by-data" data-sort-by="likes">sort by likes</button>
+<button class="sort-by-data" data-sort-by="number" data-sort-order="desc">sort by number / desc</button>
+<button class="sort-by-data" data-sort-by="name" data-sort-order="desc">sort by name / desc</button>
+<button class="sort-by-data" data-sort-by="likes" data-sort-order="desc">sort by likes / desc</button>
+
+<button class="filter-by-class" data-filter=".alive">filter .alive</button>
+<button class="filter-by-class" data-filter=".big">filter .big</button>
+<button class="filter-by-class" data-filter=".small">filter .small</button>
+
+
+  <div id="grid_parent">
+    <div class="alive" data-number="1" data-name="Cat" data-likes="50">1, Cat, 50</div>
+    <div class="big" data-number="2" data-name="Airplane" data-likes="3">2, Airplane, 3</div>
+    <div class="big" data-number="3" data-name="Earth" data-likes="99">3, Earth, 99</div>
+    <div class="small" data-number="4" data-name="Coin" data-likes="14">4, Coin, 14</div>
+    <div class="small" data-number="5" data-name="Phone" data-likes="134">5, Phone, 134</div>
+    <div class="small" class="alive" data-number="6" data-name="Dog" data-likes="55">6, Dog, 55</div>
+    <div class="small" data-number="7" data-name="Pencil" data-likes="72">7, Pencil, 72</div>
+    <div class="small" data-number="8" data-name="Pizza" data-likes="1">8, Pizza, 1</div>
+    <div class="big" data-number="9" data-name="Helicopter" data-likes="73">9, Helicopter, 73</div>
+    <div class="alive" data-number="10" data-name="Mouse" data-likes="3">10, Mouse, 3</div>
+
+  </div>
+
+</body>
+</html>

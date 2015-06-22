@@ -20,12 +20,38 @@
             _this.sortGrid(options);
         });
 
-        
+        var sortItems = function (items) {
+          if (settings.sort !== 'data') {
+				    return items.sort(settings.sort);
+          }
+          else {
+				    return items.sort(function(a, b) {
+              var $a, $b;
+			        if (settings.by !== 'text') {
+			          $a = $(a).data(settings.dataSortBy);
+			          $b = $(b).data(settings.dataSortBy);
+			        } else {
+			          $a = $(a).text();
+			          $b = $(b).text();
+			        }
+			        if (settings.dataSortOrder === 'asc')
+			          if ($a > $b)
+			            return 1;
+			          else
+			            return -1;
+			        else if ($a < $b)
+			          return 1;
+			        else
+			          return -1;
+            });
+          }
+        };
+
         return this.each(function(){
         
             var $parent   = $(this)
               , hideClass = settings.classPrefix + 'hidden'//(settings.animate ? 'fadeOut' : 'hidden')
-              , $items    = settings.sort ? $parent.children(settings.selector).sort(settings.sort) : $parent.children(settings.selector)
+              , $items    = settings.sort ? sortItems($parent.children(settings.selector)) : $parent.children(settings.selector)
               , $filter   = $items.filter(settings.filter)
               , $toShow   = $filter.filter('.'+hideClass)
               , $visible  = $items.not('.'+hideClass)
@@ -81,7 +107,9 @@
         classPrefix: 'sortGrid_',
         selector:'*',
         filter:'*',
-        sort:false
+        sort: false,
+        dataSortBy: 'text',
+        dataSortOrder: 'asc'
     };
 
 })(jQuery);
